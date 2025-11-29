@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMAAS - Euro Mediterranean Academy of Arts & Sciences</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #10b981;
+            --danger-color: #ef4444;
+            --gold: #d4af37;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Logo SVG */
+        .logo-svg {
+            width: 180px;
+            height: auto;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 220px;
+            box-shadow: var(--shadow-hover);
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            list-style: none;
+            margin: 0;
+            padding: 1rem 0;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            color: var(--text-dark);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-item:hover {
+            background: var(--bg-light);
+            color: var(--primary-color);
+            padding-left: 2rem;
+        }
+
+        /* ADMIN MENU - Special styling */
+        .admin-menu {
+            position: relative;
+        }
+
+        .admin-badge {
+            background: var(--danger-color);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.5rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .admin-dropdown {
+            background: linear-gradient(135deg, var(--danger-color), #dc2626) !important;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .admin-dropdown .dropdown-item {
+            color: white !important;
+        }
+
+        .admin-dropdown .dropdown-item:hover {
+            background: rgba(255,255,255,0.2) !important;
+            color: white !important;
+            padding-left: 2rem;
+        }
+
+        /* Admin Status Indicator */
+        .admin-status {
+            display: none;
+            background: var(--danger-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .admin-logged-in .admin-status {
+            display: flex;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(30,58,138,0.9), rgba(59,130,246,0.8)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700"><rect fill="%23e0f2fe" width="1200" height="700"/><circle fill="%233b82f6" opacity="0.2" cx="300" cy="200" r="150"/><circle fill="%2310b981" opacity="0.1" cx="900" cy="400" r="200"/><path fill="%23d4af37" opacity="0.05" d="M0 500Q300 400 600 500T1200 500V700H0z"/></svg>');
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Merriweather', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--primary-color);
+                width: 100%;
+                text-align: center;
+                padding: 2rem 0;
+                gap: 0;
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background: rgba(255,255,255,0.1);
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo-svg">
+                <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#d4af37;stop-opacity:1"/>
+                            <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1"/>
+                            <stop offset="100%" style="stop-color:#1e3a8a;stop-opacity:1"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="200" height="60" rx="10" fill="url(#grad1)"/>
+                    <text x="20" y="38" font-family="Merriweather, serif" font-size="20" font-weight="700" fill="white">EMAAS</text>
+                    <text x="20" y="52" font-family="Open Sans, sans-serif" font-size="10" fill="rgba(255,255,255,0.9)">Euro Mediterranean Academy</text>
+                    <circle cx="170" cy="20" r="6" fill="white" opacity="0.8"/>
+                    <circle cx="185" cy="25" r="4" fill="white" opacity="0.6"/>
+                    <path d="M175 35 Q180 40 185 35" stroke="white" stroke-width="2" fill="none" opacity="0.7"/>
+                </svg>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link"><i class="fas fa-info-circle"></i> About <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="mission.html" class="dropdown-item">Mission</a></li>
+                        <li><a href="vision.html" class="dropdown-item">Vision</a></li>
+                        <li><a href="history.html" class="dropdown-item">History</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link"><i class="fas fa-tasks"></i> Activities <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="goals.html" class="dropdown-item">Main Goals</a></li>
+                        <li><a href="projects.html" class="dropdown-item">Projects</a></li>
+                        <li><a href="research.html" class="dropdown-item">Research Areas</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link"><i class="fas fa-users"></i> Resources <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="documents.html" class="dropdown-item">Documents</a></li>
+                        <li><a href="photos.html" class="dropdown-item">Photo Gallery</a></li>
+                        <li><a href="publications.html" class="dropdown-item">Publications</a></li>
+                    </ul>
+                </li>
+
+                <!-- 🔥 NEW ADMIN MENU ITEM 🔥 -->
+                <li class="nav-item dropdown admin-menu" id="adminMenu">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-cog"></i> Admin 
+                        <span class="admin-badge" id="adminBadge">🔐</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content admin-dropdown" id="adminDropdown">
+                        <li><a href="admin.html" class="dropdown-item"><i class="fas fa-upload"></i> Media Library</a></li>
+                        <li><a href="#" class="dropdown-item" onclick="showAdminLogin()"><i class="fas fa-sign-in-alt"></i> Admin Login</a></li>
+                        <li><a href="#" class="dropdown-item" onclick="logoutAdmin()" id="adminLogout" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            
+            <!-- Admin Status -->
+            <div class="admin-status" id="adminStatus">
+                <i class="fas fa-shield-alt"></i>
+                <span>Admin Active</span>
+                <button onclick="logoutAdmin()" style="background:none;border:none;color:white;font-size:1.1rem;cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Euro Mediterranean<br>Academy of Arts & Sciences</h1>
+        <p>Transforming sciences for global excellence through high-quality research by ballot-selected academicians[attached_file:1]</p>
+        <div style="margin-top: 2rem;">
+            <a href="mission.html" class="cta-button" style="background:var(--accent-color);color:white;padding:1rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:600;margin-right:1rem;">Explore Our Mission</a>
+            <a href="admin.html" class="cta-button" style="background:var(--danger-color);color:white;padding:1rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:600;" id="adminCta" style="display:none;">Admin Panel</a>
+        </div>
+    </section>
+
+    <script>
+        // 🔥 ADMIN SYSTEM 🔥
+        const ADMIN_PASSWORD = 'emaas2025'; // Change this in production
+        let isAdmin = localStorage.getItem('emaas_admin') === 'true';
+        
+        const adminMenu = document.getElementById('adminMenu');
+        const adminBadge = document.getElementById('adminBadge');
+        const adminDropdown = document.getElementById('adminDropdown');
+        const adminStatus = document.getElementById('adminStatus');
+        const adminLogout = document.getElementById('adminLogout');
+        const adminCta = document.getElementById('adminCta');
+        const body = document.body;
+        const navMenu = document.getElementById('navMenu');
+        const hamburger = document.getElementById('hamburger');
+
+        // Update UI based on admin status
+        function updateAdminUI() {
+            if (isAdmin) {
+                body.classList.add('admin-logged-in');
+                adminMenu.style.display = 'block';
+                adminBadge.textContent = 'ADMIN';
+                adminStatus.style.display = 'flex';
+                adminLogout.style.display = 'block';
+                adminCta.style.display = 'inline-block';
+                console.log('✅ EMAAS Admin authentication active');
+            } else {
+                body.classList.remove('admin-logged-in');
+                adminBadge.textContent = '🔐';
+                adminStatus.style.display = 'none';
+                adminLogout.style.display = 'none';
+                adminCta.style.display = 'none';
+            }
+        }
+
+        // Admin Login Modal
+        function showAdminLogin() {
+            const password = prompt('🔐 Admin Access\n\nEnter password:');
+            if (password === ADMIN_PASSWORD) {
+                localStorage.setItem('emaas_admin', 'true');
+                isAdmin = true;
+                updateAdminUI();
+                alert('✅ Welcome EMAAS Administrator!');
+            } else if (password !== null) {
+                alert('❌ Invalid password');
+            }
+        }
+
+        // Admin Logout
+        function logoutAdmin() {
+            if (confirm('Logout from Admin?')) {
+                localStorage.removeItem('emaas_admin');
+                isAdmin = false;
+                updateAdminUI();
+            }
+        }
+
+        // Mobile menu toggle
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Initialize
+        updateAdminUI();
+
+        // Listen for storage changes (multi-tab support)
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'emaas_admin') {
+                isAdmin = e.newValue === 'true';
+                updateAdminUI();
+            }
+        });
+
+        // Keyboard shortcut for admin (Ctrl+Shift+A)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                e.preventDefault();
+                showAdminLogin();
+            }
+        });
+    </script>
+</body>
+</html>
