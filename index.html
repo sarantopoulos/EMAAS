@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EMAAS – Euro Mediterranean Academy of Arts & Sciences</title>
+    <title>Contact – EMAAS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Fonts and icons -->
@@ -203,52 +203,26 @@
             transition: 0.3s;
         }
 
-        .hero {
+        /* Page banner (instead of hero) */
+        .page-hero {
             background: radial-gradient(circle at top left, #f0c545 0, #a42e00 40%, #3b1300 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
             color: white;
             margin-top: 130px;
-            padding: 2.5rem 1.5rem;
+            padding: 3rem 1.5rem;
+            text-align: center;
         }
 
-        .hero h1 {
+        .page-hero h1 {
             font-family: "Merriweather", serif;
-            font-size: clamp(2.6rem, 5.5vw, 4.4rem);
-            margin-bottom: 1rem;
-            text-shadow: 0 3px 8px rgba(0,0,0,0.4);
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            margin-bottom: 0.5rem;
         }
 
-        .hero p {
-            font-size: 1.15rem;
+        .page-hero p {
             max-width: 720px;
-            margin: 0 auto 2rem;
+            margin: 0.5rem auto 0;
+            font-size: 1.05rem;
         }
-
-        .hero-ctas a {
-            display: inline-block;
-            margin: 0.4rem 0.4rem;
-            padding: 0.8rem 2.2rem;
-            border-radius: 999px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            box-shadow: var(--shadow);
-            transition: all 0.22s;
-        }
-
-        .hero-ctas a:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .btn-about  { background: var(--secondary-color); color: white; }
-        .btn-struct { background: #7b3b00; color: #ffe9b8; }
-        .btn-nous   { background: var(--gold); color: #4a2600; }
 
         main {
             max-width: 1100px;
@@ -268,7 +242,134 @@
             text-align: center;
             color: var(--text-light);
             max-width: 760px;
-            margin: 0 auto;
+            margin: 0 auto 3rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1.2fr;
+            gap: 2.5rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .contact-item h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        .form-group {
+            margin-bottom: 1.3rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 2px solid #e5c7a0;
+            font-family: inherit;
+            font-size: 0.95rem;
+            background: #fffaf2;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(213,69,5,0.22);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        textarea { min-height: 130px; resize: vertical; }
+
+        .submit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-color), #f4c845);
+            color: #4a2600;
+            border: none;
+            padding: 0.9rem 2.4rem;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.22s;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .form-message {
+            display: none;
+            margin-bottom: 1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        .form-message.success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .form-message.error {
+            display: block;
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
         }
 
         footer {
@@ -312,12 +413,14 @@
                 padding-left: 1.3rem;
             }
             .hamburger { display: flex; }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 <header>
-    <!-- EMAAS logo above menu -->
     <div class="logo-bar">
         <div class="logo-inner">
             <a href="index.html">
@@ -326,7 +429,6 @@
         </div>
     </div>
 
-    <!-- Navigation -->
     <nav>
         <div class="nav-inner">
             <ul class="nav-menu" id="navMenu">
@@ -367,11 +469,6 @@
                     <ul class="dropdown-content dropdown-nous">
                         <li><a href="nous/latest.html" class="dropdown-item">Latest Publications</a></li>
                         <li><a href="nous/2025-q4.html" class="dropdown-item">Sustainable Energy Q4 2025</a></li>
-                        <li><a href="nous/mediterranean-ecology.html" class="dropdown-item">Mediterranean Ecology</a></li>
-                        <li><a href="nous/seismic-research.html" class="dropdown-item">Seismic Research Sparta</a></li>
-                        <li><a href="nous/renewable-tech.html" class="dropdown-item">Renewable Technologies</a></li>
-                        <li><a href="nous/sparta-history.html" class="dropdown-item">Sparta Scientific Legacy</a></li>
-                        <li><a href="nous/lausanne-branch.html" class="dropdown-item">Lausanne Research Hub</a></li>
                         <li><a href="nous/member-profiles.html" class="dropdown-item">Academy Members</a></li>
                     </ul>
                 </li>
@@ -394,7 +491,6 @@
                     </ul>
                 </li>
 
-                <!-- Admin menu: Media Library link added dynamically only for admins -->
                 <li class="nav-item dropdown admin-menu" id="adminMenu">
                     <a href="#" class="nav-link">
                         <i class="fas fa-cog"></i> Admin
@@ -402,7 +498,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </a>
                     <ul class="dropdown-content dropdown-admin" id="adminDropdown">
-                        <!-- Media Library will be injected by JS only when isAdmin === true -->
+                        <!-- Media Library link injected only for admins -->
                         <li><a href="#" class="dropdown-item" onclick="showAdminLogin()"><i class="fas fa-sign-in-alt"></i> Admin Login</a></li>
                         <li><a href="#" class="dropdown-item" onclick="logoutAdmin()" id="adminLogout" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                     </ul>
@@ -428,21 +524,97 @@
     </nav>
 </header>
 
-<section class="hero">
-    <h1>Euro Mediterranean Academy of Arts & Sciences</h1>
-    <p>Transforming sciences for global excellence through high-quality research by ballot-selected academicians.</p>
-    <div class="hero-ctas">
-        <a href="mission.html" class="btn-about"><i class="fas fa-compass"></i> Learn About Us</a>
-        <a href="structure/presidium.html" class="btn-struct"><i class="fas fa-sitemap"></i> Meet Our Structure</a>
-        <a href="nous/latest.html" class="btn-nous"><i class="fas fa-newspaper"></i> Read Nous Articles</a>
-    </div>
+<section class="page-hero">
+    <h1>Contact EMAAS</h1>
+    <p>Get in touch with the Euro Mediterranean Academy of Arts & Sciences for collaborations, membership, and general inquiries.</p>
 </section>
 
 <main>
-    <h2 class="section-title">Welcome to EMAAS</h2>
+    <h2 class="section-title">Send us a Message</h2>
     <p class="section-text">
-        This site presents the Academy’s mission, governance structure, members, publications, news, and the “Nous” article series.
+        Please use the form below to contact the Academy. A member of our team will respond as soon as possible.
     </p>
+
+    <div class="contact-grid">
+        <div class="contact-card">
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div>
+                    <h3>Headquarters</h3>
+                    <p>Sparta, Greece</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-map-pin"></i></div>
+                <div>
+                    <h3>Branch Office</h3>
+                    <p>Lausanne, Switzerland</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <div>
+                    <h3>Email</h3>
+                    <p>info@euromediterraneanacademy.org</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                <div>
+                    <h3>Response Time</h3>
+                    <p>Typically within 2 business days</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-card">
+            <div id="formMessage" class="form-message"></div>
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="inquiryType">Inquiry Type *</label>
+                    <select id="inquiryType" name="inquiryType" required>
+                        <option value="">Select an option</option>
+                        <option value="membership">Membership & Collaboration</option>
+                        <option value="research">Research Partnership</option>
+                        <option value="event">Events & Conferences</option>
+                        <option value="publication">Publications</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="media">Media Request</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="organization">Organization</label>
+                    <input type="text" id="organization" name="organization">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </div>
 </main>
 
 <footer>
@@ -456,11 +628,8 @@
     function ensureMediaLibraryLink() {
         const adminDropdown = document.getElementById('adminDropdown');
         if (!adminDropdown) return;
-
-        // remove any existing Media Library item first
         const existing = adminDropdown.querySelector('[data-media-link="true"]');
         if (existing) existing.remove();
-
         if (isAdmin) {
             const li = document.createElement('li');
             li.setAttribute('data-media-link', 'true');
@@ -509,6 +678,20 @@
     }
 
     updateAdminUI();
+
+    // Contact form handler (static demo)
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+
+    if (contactForm && formMessage) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            formMessage.textContent = 'Thank you for your message. We will respond as soon as possible.';
+            formMessage.className = 'form-message success';
+            this.reset();
+            setTimeout(() => { formMessage.className = 'form-message'; }, 5000);
+        });
+    }
 </script>
 </body>
 </html>
