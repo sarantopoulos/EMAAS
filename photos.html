@@ -57,7 +57,7 @@
         .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
         .hamburger span { width: 22px; height: 3px; background: white; transition: 0.3s; }
         main {
-            margin-top: 80px; flex: 1; max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;
+            margin-top: 80px; flex: 1; max-width: 1400px; margin: 0 auto; padding: 4rem 2rem;
         }
         .photos-hero {
             text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, var(--primary-color) 0%, #d54505 100%);
@@ -68,7 +68,7 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         .photo-gallery {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;
         }
         .photo-card {
             background: white; border-radius: 15px; box-shadow: var(--shadow); overflow: hidden;
@@ -76,7 +76,7 @@
         }
         .photo-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
         .photo-card img {
-            width: 100%; height: 250px; object-fit: cover; display: block;
+            width: 100%; height: 300px; object-fit: cover; display: block;
         }
         .photo-overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -86,7 +86,7 @@
         }
         .photo-card:hover .photo-overlay { opacity: 1; }
         .photo-caption {
-            font-family: 'Merriweather', serif; font-size: 1.1rem; font-weight: 600;
+            font-family: 'Merriweather', serif; font-size: 1.2rem; font-weight: 600;
         }
         footer {
             background: #3b1300; color: #ffe9d1; text-align: center; padding: 2rem 1rem;
@@ -99,7 +99,7 @@
             }
             .nav-menu.active { left: 0; }
             .hamburger { display: flex; }
-            .photo-gallery { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+            .photo-gallery { grid-template-columns: 1fr; gap: 1.5rem; }
         }
     </style>
 </head>
@@ -152,39 +152,39 @@
 
         <div class="photo-gallery">
             <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587206?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Conference Hall" />
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Conference Audience" />
                 <div class="photo-overlay">
-                    <div class="photo-caption">EMAAS Annual Conference 2025</div>
+                    <div class="photo-caption">EMAAS Annual Conference Opening</div>
                 </div>
             </div>
             <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Award Ceremony" />
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Award Ceremony" />
                 <div class="photo-overlay">
-                    <div class="photo-caption">Awards Ceremony - Excellence in Research</div>
+                    <div class="photo-caption">Awards Ceremony - Research Excellence</div>
                 </div>
             </div>
             <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Research Lab" />
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Research Lab" />
                 <div class="photo-overlay">
-                    <div class="photo-caption">Quantum Materials Research Lab</div>
+                    <div class="photo-caption">Advanced Materials Research Lab</div>
                 </div>
             </div>
             <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Team Meeting" />
+                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Team Meeting" />
                 <div class="photo-overlay">
-                    <div class="photo-caption">Presidium Strategy Meeting</div>
+                    <div class="photo-caption">Presidium Strategic Planning</div>
                 </div>
             </div>
             <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Poster Session" />
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0d8d2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Poster Session" />
                 <div class="photo-overlay">
-                    <div class="photo-caption">Poster Session - Young Researchers</div>
+                    <div class="photo-caption">Young Researchers Poster Session</div>
                 </div>
             </div>
             <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Networking" />
+                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Networking" />
                 <div class="photo-overlay">
-                    <div class="photo-caption">International Networking Reception</div>
+                    <div class="photo-caption">Euro-Mediterranean Networking</div>
                 </div>
             </div>
         </div>
@@ -201,4 +201,3 @@
     </script>
 </body>
 </html>
-
