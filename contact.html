@@ -1,1 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact - EMAAS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #a42e00;
+            --secondary-color: #d54505;
+            --accent-color: #e5b800;
+            --text-dark: #2b1a0a;
+            --text-light: #6b5a4a;
+            --bg-light: #fff7eb;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.22);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Open Sans', sans-serif; line-height: 1.7; color: var(--text-dark);
+            background: var(--bg-light); min-height: 100vh; display: flex; flex-direction: column;
+        }
+        header { position: fixed; top: 0; width: 100%; z-index: 1000; }
+        nav { background: var(--primary-color); height: 80px; }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 2rem; height: 100%;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-menu { display: flex; list-style: none; gap: 1.2rem; align-items: center; }
+        .nav-link {
+            color: white; text-decoration: none; font-weight: 500; padding: 0.6rem 0.9rem;
+            border-radius: 8px; transition: all 0.3s; display: flex; align-items: center; gap: 0.4rem;
+        }
+        .nav-link:hover { background: rgba(255,255,255,0.12); }
+        .nav-link.active { 
+            background: var(--accent-color); color: var(--primary-color); font-weight: 700;
+        }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
+        .hamburger span { width: 22px; height: 3px; background: white; transition: 0.3s; }
+        main {
+            margin-top: 80px; flex: 1; max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;
+        }
+        .contact-hero {
+            text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, var(--primary-color) 0%, #d54505 100%);
+            border-radius: 20px; margin-bottom: 3rem; box-shadow: var(--shadow); color: white;
+        }
+        .contact-hero h1 {
+            font-family: 'Merriweather', serif; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .contact-container {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-bottom: 3rem;
+        }
+        .contact-info {
+            background: white; padding: 3rem; border-radius: 20px; box-shadow: var(--shadow);
+        }
+        .contact-info h2 {
+            font-family: 'Merriweather', serif; color: var(--primary-color); margin-bottom: 2rem;
+            font-size: 1.8rem;
+        }
+        .contact-person {
+            display: flex; align-items: center; gap: 1rem; padding: 1.5rem; 
+            background: var(--bg-light); border-radius: 15px; margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+        .contact-person:hover { transform: translateX(8px); box-shadow: var(--shadow); }
+        .contact-avatar {
+            width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent-color), #d4a700);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: var(--primary-color); font-size: 1.5rem; font-weight: 700;
+        }
+        .contact-details h4 {
+            color: var(--primary-color); margin-bottom: 0.3rem; font-size: 1.1rem;
+        }
+        .contact-details p { color: var(--text-light); margin: 0; }
+        .contact-form-container {
+            background: white; padding: 3rem; border-radius: 20px; box-shadow: var(--shadow);
+        }
+        .contact-form-container h2 {
+            font-family: 'Merriweather', serif; color: var(--primary-color); margin-bottom: 2rem;
+            font-size: 1.8rem; text-align: center;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block; color: var(--text-dark); font-weight: 600; margin-bottom: 0.5rem;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 1rem; border: 2px solid #e0d7c9; border-radius: 10px;
+            font-family: inherit; font-size: 1rem; transition: all 0.3s;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 3px rgba(229,184,0,0.1);
+        }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white; border: none; padding: 1.2rem 3rem; border-radius: 50px;
+            font-weight: 600; font-size: 1.1rem; cursor: pointer; transition: all 0.3s;
+            width: 100%; font-family: inherit;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+        .success-message {
+            background: rgba(76,175,80,0.1); border: 2px solid #4caf50; color: #2e7d32;
+            padding: 1rem; border-radius: 10px; text-align: center; margin-bottom: 1rem;
+            display: none;
+        }
+        footer {
+            background: #3b1300; color: #ffe9d1; text-align: center; padding: 2rem 1rem;
+            margin-top: auto;
+        }
+        @media (max-width: 820px) {
+            .nav-menu { 
+                position: fixed; left: -100%; top: 80px; flex-direction: column; background: var(--primary-color);
+                width: 100%; text-align: center; padding: 1.5rem 0; transition: 0.3s; 
+            }
+            .nav-menu.active { left: 0; }
+            .hamburger { display: flex; }
+            .contact-container { grid-template-columns: 1fr; gap: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link"><i class="fas fa-info-circle"></i> About <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="mission.html" class="dropdown-item">Mission</a></li>
+                        <li><a href="vision.html" class="dropdown-item">Vision</a></li>
+                        <li><a href="history.html" class="dropdown-item">History</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link"><i class="fas fa-sitemap"></i> Structure <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="structurepresidium.html" class="dropdown-item">Presidium</a></li>
+                        <li><a href="structureadvisory-council.html" class="dropdown-item">Advisory Council</a></li>
+                        <li><a href="structuremembers.html" class="dropdown-item">Academy Members</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link"><i class="fas fa-calendar-alt"></i> Activities <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="news.html" class="dropdown-item">News</a></li>
+                        <li><a href="projects.html" class="dropdown-item">Projects</a></li>
+                        <li><a href="research.html" class="dropdown-item">Research</a></li>
+                        <li><a href="photos.html" class="dropdown-item">Photos</a></li>
+                        <li><a href="publications.html" class="dropdown-item">Publications</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="contact.html" class="nav-link active"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="contact-hero">
+            <h1>Get In Touch</h1>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+                Contact the Euro Mediterranean Academy leadership and administration [web:45][web:118]
+            </p>
+        </section>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Persons</h2>
+                <div class="contact-person">
+                    <div class="contact-avatar">PK</div>
+                    <div class="contact-details">
+                        <h4>Prof. Dr. Paata Kervalishvili</h4>
+                        <p><a href="mailto:kervalpt@yahoo.com" style="color: var(--primary-color); text-decoration: none;">kervalpt@yahoo.com</a></p>
+                    </div>
+                </div>
+                <div class="contact-person">
+                    <div class="contact-avatar">SM</div>
+                    <div class="contact-details">
+                        <h4>Dr. Susie Michailidis</h4>
+                        <p><a href="mailto:michailidiss@webster.edu" style="color: var(--primary-color); text-decoration: none;">michailidiss@webster.edu</a></p>
+                    </div>
+                </div>
+                <div class="contact-person">
+                    <div class="contact-avatar">AS</div>
+                    <div class="contact-details">
+                        <h4>Dr. Athanasios Sarantopoulos</h4>
+                        <p><a href="mailto:asarantopoulos18@webster.edu" style="color: var(--primary-color); text-decoration: none;">asarantopoulos18@webster.edu</a></p>
+                        <small style="color: var(--text-light);">Secretary General</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <h2>Send Message to Secretary</h2>
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i> Thank you! Your message has been sent to the Secretary General.
+                </div>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select Subject</option>
+                            <option value="membership">Membership Inquiry</option>
+                            <option value="collaboration">Collaboration Proposal</option>
+                            <option value="event">Event Participation</option>
+                            <option value="publication">Publication Submission</option>
+                            <option value="general">General Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" placeholder="Please describe your inquiry..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send to Secretary
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Euro Mediterranean Academy of Arts and Sciences. All rights reserved. [web:45][web:118]</p>
+    </footer>
+
+    <script>
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate form submission
+            const formData = new FormData(this);
+            const mailtoLink = `mailto:asarantopoulos18@webster.edu?subject=EMAAS Contact Form: ${formData.get('subject')}&body=From: ${formData.get('name')} (${formData.get('email')})\n\nMessage:\n${formData.get('message')}`;
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            this.reset();
+            
+            // Optionally open default mail client (uncomment if desired)
+            // window.location.href = mailtoLink;
+            
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
 
