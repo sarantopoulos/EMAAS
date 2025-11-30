@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Academy Members - EMAAS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #a42e00;
+            --secondary-color: #d54505;
+            --accent-color: #e5b800;
+            --danger-color: #7d1300;
+            --gold: #e5b800;
+            --text-dark: #2b1a0a;
+            --text-light: #6b5a4a;
+            --bg-light: #fff7eb;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.22);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            overflow-x: hidden;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        nav {
+            background: var(--primary-color);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.2rem;
+            align-items: center;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.6rem 0.9rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.95rem;
+        }
+        .nav-link:hover {
+            background: rgba(255,255,255,0.12);
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            max-height: 360px;
+            overflow-y: auto;
+            background: white;
+            box-shadow: var(--shadow-hover);
+            border-radius: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.25s ease;
+            list-style: none;
+            padding: 0.7rem 0;
+            z-index: 1001;
+        }
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 0.6rem 1.3rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.25s;
+        }
+        .dropdown-item:hover {
+            background: var(--bg-light);
+            color: var(--primary-color);
+            padding-left: 1.7rem;
+        }
+        .badge {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 999px;
+            font-weight: 600;
+            margin-left: 0.35rem;
+        }
+        .badge-about { background: rgba(255,255,255,0.16); }
+        .badge-struct { background: rgba(0,0,0,0.22); }
+        .badge-nous { background: var(--gold); color: var(--primary-color); }
+        .dropdown-about { background: linear-gradient(135deg, #c94707, #ff7a1a); }
+        .dropdown-about .dropdown-item { color: white; }
+        .dropdown-struct { background: linear-gradient(135deg, #7b3b00, #b85b08); }
+        .dropdown-struct .dropdown-item { color: #fff7eb; }
+        .dropdown-nous { background: linear-gradient(135deg, #f0c545, #e5b800); }
+        .dropdown-nous .dropdown-item { color: #4a2600; }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        .hamburger span {
+            width: 22px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+        main {
+            margin-top: 80px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 4rem 2rem;
+        }
+        .members-hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #d54505 100%);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            color: white;
+        }
+        .members-hero h1 {
+            font-family: 'Merriweather', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .members-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 3rem;
+        }
+        .members-section h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .member-item {
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        .member-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        .member-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+        .member-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .member-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        .member-link:hover {
+            text-decoration: underline;
+        }
+        .deceased-section {
+            background: linear-gradient(135deg, #f8f7f5 0%, #e9e5de 100%);
+            border-left: 5px solid var(--danger-color);
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        footer {
+            background: #3b1300;
+            color: #ffe9d1;
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+        @media (max-width: 820px) {
+            .nav-inner { padding: 0 1rem; }
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: var(--primary-color);
+                width: 100%;
+                text-align: center;
+                padding: 1.5rem 0;
+                gap: 0;
+                transition: 0.3s;
+            }
+            .nav-menu.active { left: 0; }
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border-radius: 0;
+                max-height: none;
+                background: rgba(0,0,0,0.18);
+            }
+            .dropdown-item { color: #ffe9d1; }
+            .dropdown-item:hover {
+                background: rgba(255,255,255,0.12);
+                color: white;
+                padding-left: 1.3rem;
+            }
+            .hamburger { display: flex; }
+            main { padding: 2rem 1rem; }
+            .members-hero, .members-section { padding: 2rem 1.5rem; }
+            .members-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (same as previous pages) -->
+    <nav>
+        <div class="nav-inner">
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-info-circle"></i> About 
+                        <span class="badge badge-about">Infos</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content dropdown-about">
+                        <li><a href="mission.html" class="dropdown-item">Mission</a></li>
+                        <li><a href="vision.html" class="dropdown-item">Vision</a></li>
+                        <li><a href="history.html" class="dropdown-item">History</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-sitemap"></i> Structure 
+                        <span class="badge badge-struct">Org</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content dropdown-struct">
+                        <li><a href="structurepresidium.html" class="dropdown-item">Presidium</a></li>
+                        <li><a href="structureadvisory-council.html" class="dropdown-item">Advisory Council</a></li>
+                        <li><a href="structuremembers.html" class="dropdown-item">Academy Members</a></li>
+                        <li><a href="eligibility-criteria.html" class="dropdown-item">Eligibility Criteria</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-newspaper"></i> Nous 
+                        <span class="badge badge-nous">Articles</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content dropdown-nous">
+                        <li><a href="nous.html" class="dropdown-item">About Nous</a></li>
+                        <li><a href="nouslatest.html" class="dropdown-item">Latest Publications</a></li>
+                        <li><a href="submit-articles.html" class="dropdown-item">Submit Articles</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-tasks"></i> Activities 
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li><a href="news.html" class="dropdown-item">News</a></li>
+                        <li><a href="projects.html" class="dropdown-item">Projects</a></li>
+                        <li><a href="research.html" class="dropdown-item">Research Areas</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i> Resources 
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li><a href="documents.html" class="dropdown-item">Documents</a></li>
+                        <li><a href="photos.html" class="dropdown-item">Photo Gallery</a></li>
+                        <li><a href="publications.html" class="dropdown-item">Publications</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        
+        <section class="members-hero">
+            <h1>Members</h1>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">Distinguished scientists, scholars, and artists of the Euro Mediterranean Academy</p>
+        </section>
+
+        <section class="members-section">
+            <h2><i class="fas fa-crown"></i> Founding Members (28-05-2010)</h2>
+            <div class="members-grid">
+                <div class="member-item"><span class="member-name">Bonnin Jean</span></div>
+                <div class="member-item"><span class="member-name">Gudowski Waclaw</span></div>
+                <div class="member-item"><span class="member-name">Gvishiani A.</span></div>
+                <div class="member-item"><span class="member-name">Ivanitskaya Lida</span></div>
+                <div class="member-item"><span class="member-name">Iwata Shuichi</span></div>
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Kervalishvili.pdf" class="member-link" target="_blank">Kervalishvili Paata</a></span></div>
+                <div class="member-item"><span class="member-name">Mamalis Athanase</span></div>
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Michailidis.pdf" class="member-link" target="_blank">Michailidis Susie</a></span></div>
+                <div class="member-item"><span class="member-name">Pejovnik Stane</span></div>
+                <div class="member-item"><span class="member-name">Petrosyan Stefan</span></div>
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Ramsden.pdf" class="member-link" target="_blank">Ramsden Jeremy</a></span></div>
+                <div class="member-item"><span class="member-name">Sillard Yves</span></div>
+                <div class="member-item"><span class="member-name">Spentzas Konstantinos N.</span></div>
+                <div class="member-item"><span class="member-name">Stassinopoulou Titika</span></div>
+                <div class="member-item"><span class="member-name">Zerefos Christos</span></div>
+                <div class="member-item"><span class="member-name">Zgurovsky Michael</span></div>
+            </div>
+        </section>
+
+        <section class="members-section">
+            <h2><i class="fas fa-medal"></i> Honorary Members</h2>
+            <div class="members-grid">
+                <div class="member-item"><span class="member-name">His Holiness Ilia II, Katholikos Patriarch of Whole Georgia</span></div>
+            </div>
+        </section>
+
+        <section class="members-section">
+            <h2><i class="fas fa-users"></i> Members (Date of Membership)</h2>
+            <div class="members-grid">
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Achimova.pdf" class="member-link" target="_blank">Achimova Elena</a></span> <span class="member-date">(20-11-2018)</span></div>
+                <div class="member-item"><span class="member-name">Al-Dahoud Ali</span> <span class="member-date">(25-09-2015)</span></div>
+                <div class="member-item"><span class="member-name">Alzahabi Basem</span> <span class="member-date">(31-01-2018)</span></div>
+                <div class="member-item"><span class="member-name">Apollonov Victor Victorovich</span> <span class="member-date">(15-12-2019)</span></div>
+                <div class="member-item"><span class="member-name">Asimakopoulos Demosthenes</span> <span class="member-date">(20-09-2011)</span></div>
+                <div class="member-item"><span class="member-name">Athanassopoulos Giorgios</span> <span class="member-date">(28-09-2012)</span></div>
+                <div class="member-item"><span class="member-name">Baltezarevic Vesna</span> <span class="member-date">(10-04-2017)</span></div>
+                <div class="member-item"><span class="member-name">Belingardi Giovanni</span> <span class="member-date">(20-09-2011)</span></div>
+                <div class="member-item"><span class="member-name">Blum Winfried Erich Hubert</span> <span class="member-date">(25-09-2015)</span></div>
+                <div class="member-item"><span class="member-name">Bogdanov Yuriy</span> <span class="member-date">(23-09-2016)</span></div>
+                <div class="member-item"><span class="member-name">Bohinc Rado</span> <span class="member-date">(17-12-2024)</span></div>
+                <div class="member-item"><span class="member-name">Burchuladge Paata</span> <span class="member-date">(23-09-2014)</span></div>
+                <div class="member-item"><span class="member-name">Cekic Nikola</span> <span class="member-date">(23-09-2014)</span></div>
+                <div class="member-item"><span class="member-name">Chen Pengwan</span> <span class="member-date">(31-01-2017)</span></div>
+                <div class="member-item"><span class="member-name">De Battisti Achille</span> <span class="member-date">(23-09-2016)</span></div>
+            </div>
+            <div class="members-grid">
+                <div class="member-item"><span class="member-name">Demic Miroslav</span> <span class="member-date">(21-04-2011)</span></div>
+                <div class="member-item"><span class="member-name">Djukanovic Borislav</span> <span class="member-date">(15-12-2019)</span></div>
+                <div class="member-item"><span class="member-name">Enders Stephens</span> <span class="member-date">(07-12-2012)</span></div>
+                <div class="member-item"><span class="member-name">Enokizono Masato</span> <span class="member-date">(10-06-2017)</span></div>
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Guden.pdf" class="member-link" target="_blank">Guden Mustafa</a></span></div>
+                <div class="member-item"><span class="member-name">Hashimova Ulduz</span> <span class="member-date">(23-09-2014)</span></div>
+                <div class="member-item"><span class="member-name">Hokamoto Kazuyuki</span> <span class="member-date">(31-01-2017)</span></div>
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Hristoforou.pdf" class="member-link" target="_blank">Hristoforou Evangelos</a></span> <span class="member-date">(28-09-2012)</span></div>
+                <div class="member-item"><span class="member-name">Ioannidis Georgios</span> <span class="member-date">(10-06-2017)</span></div>
+                <div class="member-item"><span class="member-name">Karamanis Theomary</span> <span class="member-date">(10-04-2017)</span></div>
+            </div>
+        </section>
+
+        <section class="members-section deceased-section">
+            <h2><i class="fas fa-heart"></i> Members Who Departed</h2>
+            <div class="members-grid">
+                <div class="member-item"><span class="member-name">Euthymiou Paraskevi</span></div>
+                <div class="member-item"><span class="member-name">Giannakou Marietta</span></div>
+                <div class="member-item"><span class="member-name">Guerra Gianfranco</span></div>
+                <div class="member-item"><span class="member-name">Kolotilov Alexandr</span></div>
+                <div class="member-item"><span class="member-name">Lalaounis Ilias</span></div>
+                <div class="member-item"><span class="member-name">Lashkarev Giorgi V.</span></div>
+                <div class="member-item"><span class="member-name">Ratchford J. Thomas</span></div>
+                <div class="member-item"><span class="member-name">Shaltout Mosalam</span></div>
+                <div class="member-item"><span class="member-name">Turner Amedee</span></div>
+                <div class="member-item"><span class="member-name">Veziroglu Nejat T.</span></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Euro Mediterranean Academy of Arts and Sciences. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
