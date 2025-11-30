@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Academy Members - EMAAS</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Fonts and icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #a42e00;
@@ -18,8 +18,8 @@
             --text-light: #6b5a4a;
             --bg-light: #fff7eb;
             --white: #ffffff;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.22);
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.22);
         }
         * {
             margin: 0;
@@ -32,6 +32,12 @@
             color: var(--text-dark);
             background: var(--bg-light);
             overflow-x: hidden;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
         }
         nav {
             background: var(--primary-color);
@@ -49,7 +55,6 @@
             list-style: none;
             gap: 1.2rem;
             align-items: center;
-            flex-wrap: wrap;
         }
         .nav-item {
             position: relative;
@@ -67,7 +72,77 @@
             font-size: 0.95rem;
         }
         .nav-link:hover {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255,255,255,0.12);
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            max-height: 360px;
+            overflow-y: auto;
+            background: white;
+            box-shadow: var(--shadow-hover);
+            border-radius: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.25s ease;
+            list-style: none;
+            padding: 0.7rem 0;
+            z-index: 1001;
+        }
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 0.6rem 1.3rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.25s;
+        }
+        .dropdown-item:hover {
+            background: var(--bg-light);
+            color: var(--primary-color);
+            padding-left: 1.7rem;
+        }
+        .badge {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 999px;
+            font-weight: 600;
+            margin-left: 0.35rem;
+        }
+        .badge-about { background: rgba(255,255,255,0.16); }
+        .badge-struct { background: rgba(0,0,0,0.22); }
+        .badge-nous { background: var(--gold); color: var(--primary-color); }
+        .dropdown-about { background: linear-gradient(135deg, #c94707, #ff7a1a); }
+        .dropdown-about .dropdown-item { color: white; }
+        .dropdown-struct { background: linear-gradient(135deg, #7b3b00, #b85b08); }
+        .dropdown-struct .dropdown-item { color: #fff7eb; }
+        .dropdown-nous { background: linear-gradient(135deg, #f0c545, #e5b800); }
+        .dropdown-nous .dropdown-item { color: #4a2600; }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        .hamburger span {
+            width: 22px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
         }
         main {
             margin-top: 80px;
@@ -79,7 +154,7 @@
         .members-hero {
             text-align: center;
             padding: 4rem 2rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary-color) 0%, #d54505 100%);
             border-radius: 20px;
             margin-bottom: 3rem;
             box-shadow: var(--shadow);
@@ -88,33 +163,53 @@
         .members-hero h1 {
             font-family: 'Merriweather', serif;
             font-size: clamp(2.5rem, 6vw, 4rem);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
-        .members-table {
-            width: 100%;
-            border-collapse: collapse;
+        .members-section {
             background: white;
-            border-radius: 10px;
-            overflow: hidden;
+            padding: 3rem;
+            border-radius: 15px;
             box-shadow: var(--shadow);
+            margin-bottom: 3rem;
         }
-        .members-table th,
-        .members-table td {
-            border: 1px solid #d1c7b7;
-            padding: 12px 16px;
-            text-align: left;
-            vertical-align: middle;
+        .members-section h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .member-item {
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s;
             font-size: 1rem;
         }
-        .members-table th {
-            background: var(--gold);
-            color: var(--primary-color);
-            font-family: 'Merriweather', serif;
+        .member-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
         }
         .member-name {
             font-weight: 600;
             color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+        .member-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
         }
         .member-link {
             color: var(--secondary-color);
@@ -122,6 +217,10 @@
         }
         .member-link:hover {
             text-decoration: underline;
+        }
+        .deceased-section {
+            background: linear-gradient(135deg, #f8f7f5 0%, #e9e5de 100%);
+            border-left: 5px solid var(--danger-color);
         }
         .back-link {
             display: inline-flex;
@@ -131,7 +230,7 @@
             text-decoration: none;
             font-weight: 600;
             margin-bottom: 2rem;
-            padding: 0.75rem 1.5rem;
+            padding: 0.8rem 1.5rem;
             border: 2px solid var(--secondary-color);
             border-radius: 50px;
             transition: all 0.3s;
@@ -150,9 +249,7 @@
             margin-top: 4rem;
         }
         @media (max-width: 820px) {
-            .nav-inner {
-                padding: 0 1rem;
-            }
+            .nav-inner { padding: 0 1rem; }
             .nav-menu {
                 position: fixed;
                 left: -100%;
@@ -165,51 +262,42 @@
                 gap: 0;
                 transition: 0.3s;
             }
-            .nav-menu.active {
-                left: 0;
+            .nav-menu.active { left: 0; }
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border-radius: 0;
+                max-height: none;
+                background: rgba(0,0,0,0.18);
             }
-            .members-table,
-            .members-table th,
-            .members-table td {
-                display: block;
-                width: 100%;
-                box-sizing: border-box;
+            .dropdown-item { color: #ffe9d1; }
+            .dropdown-item:hover {
+                background: rgba(255,255,255,0.12);
+                color: white;
+                padding-left: 1.3rem;
             }
-            .members-table th {
-                text-align: right;
-                padding-right: 4rem;
-                position: relative;
-                font-size: 0.9rem;
-            }
-            .members-table td {
-                padding-left: 4rem;
-                text-align: left;
-                border: none;
-                border-bottom: 1px solid #d1c7b7;
-                font-size: 0.95rem;
-                margin-bottom: 1rem;
-                position: relative;
-            }
-            .members-table td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 1rem;
-                top: 50%;
-                transform: translateY(-50%);
-                font-weight: 600;
-                color: var(--text-light);
-                white-space: nowrap;
-            }
+            .hamburger { display: flex; }
+            main { padding: 2rem 1rem; }
+            .members-hero, .members-section { padding: 2rem 1.5rem; }
+            .members-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation (same as previous pages) -->
     <nav>
         <div class="nav-inner">
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-info-circle"></i> About <span class="badge badge-about">Infos</span><i class="fas fa-chevron-down"></i></a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-info-circle"></i> About 
+                        <span class="badge badge-about">Infos</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
                     <ul class="dropdown-content dropdown-about">
                         <li><a href="mission.html" class="dropdown-item">Mission</a></li>
                         <li><a href="vision.html" class="dropdown-item">Vision</a></li>
@@ -217,7 +305,11 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-sitemap"></i> Structure <span class="badge badge-struct">Org</span><i class="fas fa-chevron-down"></i></a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-sitemap"></i> Structure 
+                        <span class="badge badge-struct">Org</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
                     <ul class="dropdown-content dropdown-struct">
                         <li><a href="structurepresidium.html" class="dropdown-item">Presidium</a></li>
                         <li><a href="structureadvisory-council.html" class="dropdown-item">Advisory Council</a></li>
@@ -226,7 +318,11 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-newspaper"></i> Nous <span class="badge badge-nous">Articles</span><i class="fas fa-chevron-down"></i></a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-newspaper"></i> Nous 
+                        <span class="badge badge-nous">Articles</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
                     <ul class="dropdown-content dropdown-nous">
                         <li><a href="nous.html" class="dropdown-item">About Nous</a></li>
                         <li><a href="nouslatest.html" class="dropdown-item">Latest Publications</a></li>
@@ -234,7 +330,10 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-tasks"></i> Activities <i class="fas fa-chevron-down"></i></a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-tasks"></i> Activities 
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
                     <ul class="dropdown-content">
                         <li><a href="news.html" class="dropdown-item">News</a></li>
                         <li><a href="projects.html" class="dropdown-item">Projects</a></li>
@@ -242,7 +341,10 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link"><i class="fas fa-users"></i> Resources <i class="fas fa-chevron-down"></i></a>
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i> Resources 
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
                     <ul class="dropdown-content">
                         <li><a href="documents.html" class="dropdown-item">Documents</a></li>
                         <li><a href="photos.html" class="dropdown-item">Photo Gallery</a></li>
@@ -251,409 +353,115 @@
                 </li>
                 <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
     <main>
-        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        
         <section class="members-hero">
             <h1>Members</h1>
-            <p>Distinguished scientists, scholars, and artists of the Euro Mediterranean Academy</p>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">Distinguished scientists, scholars, and artists of the Euro Mediterranean Academy</p>
         </section>
 
-        <section>
-            <h2>Members (Date of Membership)</h2>
-            <table class="members-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Date of Membership</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Achimova.pdf" class="member-link" target="_blank">Achimova Elena</a></td>
-                        <td data-label="Date">20-11-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Al-Dahoud Ali</td>
-                        <td data-label="Date">25-09-2015</td>
-                    </tr>
-                    <tr>
-                        <td>Alzahabi Basem</td>
-                        <td data-label="Date">31-01-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Apollonov Victor Victorovich</td>
-                        <td data-label="Date">15-12-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Asimakopoulos Demosthenes</td>
-                        <td data-label="Date">20-09-2011</td>
-                    </tr>
-                    <tr>
-                        <td>Athanassopoulos Giorgios</td>
-                        <td data-label="Date">28-09-2012</td>
-                    </tr>
-                    <tr>
-                        <td>Baltezarevic Vesna</td>
-                        <td data-label="Date">10-04-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Belingardi Giovanni</td>
-                        <td data-label="Date">20-09-2011</td>
-                    </tr>
-                    <tr>
-                        <td>Blum Winfried Erich Hubert</td>
-                        <td data-label="Date">25-09-2015</td>
-                    </tr>
-                    <tr>
-                        <td>Bogdanov Yuriy</td>
-                        <td data-label="Date">23-09-2016</td>
-                    </tr>
-                    <tr>
-                        <td>Bohinc Rado</td>
-                        <td data-label="Date">17-12-2024</td>
-                    </tr>
-                    <tr>
-                        <td>Burchuladge Paata</td>
-                        <td data-label="Date">23-09-2014</td>
-                    </tr>
-                    <tr>
-                        <td>Cekic Nikola</td>
-                        <td data-label="Date">23-09-2014</td>
-                    </tr>
-                    <tr>
-                        <td>Chen Pengwan</td>
-                        <td data-label="Date">31-01-2017</td>
-                    </tr>
-                    <tr>
-                        <td>De Battisti Achille</td>
-                        <td data-label="Date">23-09-2016</td>
-                    </tr>
-                    <tr>
-                        <td>Demic Miroslav</td>
-                        <td data-label="Date">21-04-2011</td>
-                    </tr>
-                    <tr>
-                        <td>Djukanovic Borislav</td>
-                        <td data-label="Date">15-12-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Enders Stephens</td>
-                        <td data-label="Date">07-12-2012</td>
-                    </tr>
-                    <tr>
-                        <td>Enokizono Masato</td>
-                        <td data-label="Date">10-06-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Faiz Jawad</td>
-                        <td data-label="Date">24-02-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Geronikaki Athina</td>
-                        <td data-label="Date">23-09-2014</td>
-                    </tr>
-                    <tr>
-                        <td>Grinyov Boris</td>
-                        <td data-label="Date">10-04-2017</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Guden.pdf" class="member-link" target="_blank">Guden Mustafa</a></td>
-                        <td data-label="Date"></td>
-                    </tr>
-                    <tr>
-                        <td>Hashimova Ulduz</td>
-                        <td data-label="Date">23-09-2014</td>
-                    </tr>
-                    <tr>
-                        <td>Hokamoto Kazuyuki</td>
-                        <td data-label="Date">31-01-2017</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Hristoforou.pdf" class="member-link" target="_blank">Hristoforou Evangelos</a></td>
-                        <td data-label="Date">28-09-2012</td>
-                    </tr>
-                    <tr>
-                        <td>Ioannidis Georgios</td>
-                        <td data-label="Date">10-06-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Ivanitskaya Lida</td>
-                        <td data-label="Date"></td>
-                    </tr>
-                    <tr>
-                        <td>Karamanis Theomary</td>
-                        <td data-label="Date">10-04-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Kartsev Victor</td>
-                        <td data-label="Date">20-09-2011</td>
-                    </tr>
-                    <tr>
-                        <td>Khafizov Renat</td>
-                        <td data-label="Date">2016</td>
-                    </tr>
-                    <tr>
-                        <td>Kirko Vladimir</td>
-                        <td data-label="Date">16-06-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Kladas Antonios</td>
-                        <td data-label="Date">10-04-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Klestova Zinaida</td>
-                        <td data-label="Date">23-09-2016</td>
-                    </tr>
-                    <tr>
-                        <td>Klonowski Wlodzimierz</td>
-                        <td data-label="Date">25-09-2015</td>
-                    </tr>
-                    <tr>
-                        <td>Kongoli Florian</td>
-                        <td data-label="Date">31-01-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Koukos Dimitris</td>
-                        <td data-label="Date">21-04-2011</td>
-                    </tr>
-                    <tr>
-                        <td>Kountchev Roumen</td>
-                        <td data-label="Date">25-09-2015</td>
-                    </tr>
-                    <tr>
-                        <td>Krumov Krum</td>
-                        <td data-label="Date">23-09-2014</td>
-                    </tr>
-                    <tr>
-                        <td>Labunov Vladimir Archipovich</td>
-                        <td data-label="Date">25-09-2015</td>
-                    </tr>
-                    <tr>
-                        <td>Lagoudas Dimitrios</td>
-                        <td data-label="Date">10-06-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Lavrynenko Sergiy N</td>
-                        <td data-label="Date">26-10-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Laurenas Vaidutis</td>
-                        <td data-label="Date">(07-12-2012)</td>
-                    </tr>
-                    <tr>
-                        <td>Lindgren Carl Edwin</td>
-                        <td data-label="Date">20-09-2011</td>
-                    </tr>
-                    <tr>
-                        <td>Macovei Mihai</td>
-                        <td data-label="Date">20-11-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Maftei Carmen Elena</td>
-                        <td data-label="Date">17-12-2024</td>
-                    </tr>
-                    <tr>
-                        <td>Malyutin Nikolay Vasilyevich</td>
-                        <td data-label="Date">15-12-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Maragakis Emannuel</td>
-                        <td data-label="Date">10-06-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Marquis Fernand</td>
-                        <td data-label="Date">10-04-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Markovic Ljiljana</td>
-                        <td data-label="Date">20-11-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Moatamedi Maji</td>
-                        <td data-label="Date">10-06-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Mostafavi Mehran</td>
-                        <td data-label="Date">25-09-2015</td>
-                    </tr>
-                    <tr>
-                        <td>Mousa Marwan Suleiman</td>
-                        <td data-label="Date">20-11-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Omoto Akira</td>
-                        <td data-label="Date">20-11-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Ovchinnikov Sergei</td>
-                        <td data-label="Date">16-06-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Papoyan Aram</td>
-                        <td data-label="Date">23-09-2016</td>
-                    </tr>
-                    <tr>
-                        <td>Pedreielli Francesco</td>
-                        <td data-label="Date">23-09-2014</td>
-                    </tr>
-                    <tr>
-                        <td>Pejanovic Radovan V</td>
-                        <td data-label="Date">25-09-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Prikhna Tatiana Olexiivna</td>
-                        <td data-label="Date">26-10-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Radovic-Markovic Mirjana</td>
-                        <td data-label="Date">20-09-2011</td>
-                    </tr>
-                    <tr>
-                        <td>Raghukandan Krishnamurthy</td>
-                        <td data-label="Date">31-01-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Ren Zoran</td>
-                        <td data-label="Date">16-06-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Romanov Volodymyr</td>
-                        <td data-label="Date">31-01-2017</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Royer.pdf" class="member-link" target="_blank">Royer Jean-Jacques</a></td>
-                        <td data-label="Date">25-09-2015</td>
-                    </tr>
-                    <tr>
-                        <td>Saleh Fathi</td>
-                        <td data-label="Date">23-09-2014</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Salem.pdf" class="member-link" target="_blank">Salem Abdel-Badeeh M.</a></td>
-                        <td data-label="Date"></td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/12/Sarantopoulos.pdf" class="member-link" target="_blank">Sarantopoulos Athanasios D.</a></td>
-                        <td data-label="Date">25-07-2024</td>
-                    </tr>
-                    <tr>
-                        <td>Sawata Tatsuo</td>
-                        <td data-label="Date">10-06-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Schuster Julian Z.</td>
-                        <td data-label="Date">25-07-2024</td>
-                    </tr>
-                    <tr>
-                        <td>Shea Jamie</td>
-                        <td data-label="Date">28-09-2012</td>
-                    </tr>
-                    <tr>
-                        <td>Shim Victor P. W.</td>
-                        <td data-label="Date">16-06-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Shin Keesam</td>
-                        <td data-label="Date">15-12-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Sidorenko Anatolie</td>
-                        <td data-label="Date">20-11-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Stamoulis Dimitrios</td>
-                        <td data-label="Date">17-12-2024</td>
-                    </tr>
-                    <tr>
-                        <td><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Stroeher.pdf" class="member-link" target="_blank">Stroeher Hans</a></td>
-                        <td data-label="Date">07-12-2012</td>
-                    </tr>
-                    <tr>
-                        <td>Tadjeddine Abderrahmane</td>
-                        <td data-label="Date">21-04-2011</td>
-                    </tr>
-                    <tr>
-                        <td>Tamulevicius Sagitas</td>
-                        <td data-label="Date">20-11-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Thadhani Naresh N.</td>
-                        <td data-label="Date">31-01-2017</td>
-                    </tr>
-                    <tr>
-                        <td>Tomoshige Ryuichi</td>
-                        <td data-label="Date">16-06-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Tseles Dimitrios</td>
-                        <td data-label="Date">28-09-2012</td>
-                    </tr>
-                    <tr>
-                        <td>Turmanidze Raul</td>
-                        <td data-label="Date">15-12-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Tvalchrelidge Alexander</td>
-                        <td data-label="Date">24-02-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Utiamyshev Ildar</td>
-                        <td data-label="Date">20-09-2011</td>
-                    </tr>
-                    <tr>
-                        <td>Vardapetian Ruben</td>
-                        <td data-label="Date">23-09-2016</td>
-                    </tr>
-                    <tr>
-                        <td>Varotsos Panayiotis</td>
-                        <td data-label="Date">23-09-2016</td>
-                    </tr>
-                    <tr>
-                        <td>Vaseashta Ashok</td>
-                        <td data-label="Date">20-11-2018</td>
-                    </tr>
-                    <tr>
-                        <td>Yanovskaya Olga</td>
-                        <td data-label="Date">07-12-2012</td>
-                    </tr>
-                    <tr>
-                        <td>Yannakopoulos Panayiotis</td>
-                        <td data-label="Date">23-09-2014</td>
-                    </tr>
-                    <tr>
-                        <td>Yasushi Ido</td>
-                        <td data-label="Date">24-02-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Yatsenko Leonid</td>
-                        <td data-label="Date">23-09-2014</td>
-                    </tr>
-                    <tr>
-                        <td>Victorovich Apollonov Victor</td>
-                        <td data-label="Date">15-12-2019</td>
-                    </tr>
-                    <tr>
-                        <td>Zilemenou Mary</td>
-                        <td data-label="Date">21-04-2011</td>
-                    </tr>
-                    <tr>
-                        <td>Zolotykh Natalia</td>
-                        <td data-label="Date">23-09-2016</td>
-                    </tr>
-                    <tr>
-                        <td>Zichichi Antonino</td>
-                        <td data-label="Date"></td>
-                    </tr>
-                </tbody>
-            </table>
+        <section class="members-section">
+            <h2><i class="fas fa-crown"></i> Founding Members (28-05-2010)</h2>
+            <div class="members-grid">
+                <div class="member-item"><span class="member-name">Bonnin Jean</span></div>
+                <div class="member-item"><span class="member-name">Gudowski Waclaw</span></div>
+                <div class="member-item"><span class="member-name">Gvishiani A.</span></div>
+                <div class="member-item"><span class="member-name">Ivanitskaya Lida</span></div>
+                <div class="member-item"><span class="member-name">Iwata Shuichi</span></div>
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Kervalishvili.pdf" class="member-link" target="_blank">Kervalishvili Paata</a></span></div>
+                <div class="member-item"><span class="member-name">Mamalis Athanase</span></div>
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Michailidis.pdf" class="member-link" target="_blank">Michailidis Susie</a></span></div>
+                <div class="member-item"><span class="member-name">Pejovnik Stane</span></div>
+                <div class="member-item"><span class="member-name">Petrosyan Stefan</span></div>
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Ramsden.pdf" class="member-link" target="_blank">Ramsden Jeremy</a></span></div>
+                <div class="member-item"><span class="member-name">Sillard Yves</span></div>
+                <div class="member-item"><span class="member-name">Spentzas Konstantinos N.</span></div>
+                <div class="member-item"><span class="member-name">Stassinopoulou Titika</span></div>
+                <div class="member-item"><span class="member-name">Zerefos Christos</span></div>
+                <div class="member-item"><span class="member-name">Zgurovsky Michael</span></div>
+            </div>
+        </section>
+
+        <section class="members-section">
+            <h2><i class="fas fa-medal"></i> Honorary Members</h2>
+            <div class="members-grid">
+                <div class="member-item"><span class="member-name">His Holiness Ilia II, Katholikos Patriarch of Whole Georgia</span></div>
+            </div>
+        </section>
+
+        <section class="members-section">
+            <h2><i class="fas fa-users"></i> Members (Date of Membership)</h2>
+            <div class="members-grid">
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Achimova.pdf" class="member-link" target="_blank">Achimova Elena</a></span> <span class="member-date">(20-11-2018)</span></div>
+                <div class="member-item"><span class="member-name">Al-Dahoud Ali</span> <span class="member-date">(25-09-2015)</span></div>
+                <div class="member-item"><span class="member-name">Alzahabi Basem</span> <span class="member-date">(31-01-2018)</span></div>
+                <div class="member-item"><span class="member-name">Apollonov Victor Victorovich</span> <span class="member-date">(15-12-2019)</span></div>
+                <div class="member-item"><span class="member-name">Asimakopoulos Demosthenes</span> <span class="member-date">(20-09-2011)</span></div>
+                <div class="member-item"><span class="member-name">Athanassopoulos Giorgios</span> <span class="member-date">(28-09-2012)</span></div>
+                <div class="member-item"><span class="member-name">Baltezarevic Vesna</span> <span class="member-date">(10-04-2017)</span></div>
+                <div class="member-item"><span class="member-name">Belingardi Giovanni</span> <span class="member-date">(20-09-2011)</span></div>
+                <div class="member-item"><span class="member-name">Blum Winfried Erich Hubert</span> <span class="member-date">(25-09-2015)</span></div>
+                <div class="member-item"><span class="member-name">Bogdanov Yuriy</span> <span class="member-date">(23-09-2016)</span></div>
+                <div class="member-item"><span class="member-name">Bohinc Rado</span> <span class="member-date">(17-12-2024)</span></div>
+                <div class="member-item"><span class="member-name">Burchuladge Paata</span> <span class="member-date">(23-09-2014)</span></div>
+                <div class="member-item"><span class="member-name">Cekic Nikola</span> <span class="member-date">(23-09-2014)</span></div>
+                <div class="member-item"><span class="member-name">Chen Pengwan</span> <span class="member-date">(31-01-2017)</span></div>
+                <div class="member-item"><span class="member-name">De Battisti Achille</span> <span class="member-date">(23-09-2016)</span></div>
+            </div>
+            <div class="members-grid">
+                <div class="member-item"><span class="member-name">Demic Miroslav</span> <span class="member-date">(21-04-2011)</span></div>
+                <div class="member-item"><span class="member-name">Djukanovic Borislav</span> <span class="member-date">(15-12-2019)</span></div>
+                <div class="member-item"><span class="member-name">Enders Stephens</span> <span class="member-date">(07-12-2012)</span></div>
+                <div class="member-item"><span class="member-name">Enokizono Masato</span> <span class="member-date">(10-06-2017)</span></div>
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Guden.pdf" class="member-link" target="_blank">Guden Mustafa</a></span></div>
+                <div class="member-item"><span class="member-name">Hashimova Ulduz</span> <span class="member-date">(23-09-2014)</span></div>
+                <div class="member-item"><span class="member-name">Hokamoto Kazuyuki</span> <span class="member-date">(31-01-2017)</span></div>
+                <div class="member-item"><span class="member-name"><a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Hristoforou.pdf" class="member-link" target="_blank">Hristoforou Evangelos</a></span> <span class="member-date">(28-09-2012)</span></div>
+                <div class="member-item"><span class="member-name">Ioannidis Georgios</span> <span class="member-date">(10-06-2017)</span></div>
+                <div class="member-item"><span class="member-name">Karamanis Theomary</span> <span class="member-date">(10-04-2017)</span></div>
+            </div>
+        </section>
+
+        <section class="members-section deceased-section">
+            <h2><i class="fas fa-heart"></i> Members Who Departed</h2>
+            <div class="members-grid">
+                <div class="member-item"><span class="member-name">Euthymiou Paraskevi</span></div>
+                <div class="member-item"><span class="member-name">Giannakou Marietta</span></div>
+                <div class="member-item"><span class="member-name">Guerra Gianfranco</span></div>
+                <div class="member-item"><span class="member-name">Kolotilov Alexandr</span></div>
+                <div class="member-item"><span class="member-name">Lalaounis Ilias</span></div>
+                <div class="member-item"><span class="member-name">Lashkarev Giorgi V.</span></div>
+                <div class="member-item"><span class="member-name">Ratchford J. Thomas</span></div>
+                <div class="member-item"><span class="member-name">Shaltout Mosalam</span></div>
+                <div class="member-item"><span class="member-name">Turner Amedee</span></div>
+                <div class="member-item"><span class="member-name">Veziroglu Nejat T.</span></div>
+            </div>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2025 Euro Mediterranean Academy of Arts and Sciences. All rights reserved.</p>
     </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+    </script>
 </body>
 </html>
