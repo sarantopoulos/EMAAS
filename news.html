@@ -21,8 +21,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Open Sans', sans-serif; line-height: 1.7; color: var(--text-dark);
-            background: linear-gradient(135deg, var(--bg-light) 0%, #fff1e0 100%);
-            min-height: 100vh; display: flex; flex-direction: column;
+            background: var(--bg-light); min-height: 100vh; display: flex; flex-direction: column;
         }
         header { position: fixed; top: 0; width: 100%; z-index: 1000; }
         nav { background: var(--primary-color); height: 80px; }
@@ -36,70 +35,54 @@
             border-radius: 8px; transition: all 0.3s; display: flex; align-items: center; gap: 0.4rem;
         }
         .nav-link:hover { background: rgba(255,255,255,0.12); }
+        .nav-link.active { 
+            background: var(--accent-color); color: var(--primary-color); font-weight: 700;
+        }
         .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
         .hamburger span { width: 22px; height: 3px; background: white; transition: 0.3s; }
         main {
             margin-top: 80px; flex: 1; max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;
         }
-        .under-construction-hero {
-            text-align: center; padding: 6rem 2rem; background: linear-gradient(135deg, var(--primary-color) 0%, #d54505 100%);
-            border-radius: 20px; box-shadow: var(--shadow); color: white; margin-bottom: 3rem;
-            position: relative; overflow: hidden;
+        .news-hero {
+            text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, var(--primary-color) 0%, #d54505 100%);
+            border-radius: 20px; margin-bottom: 3rem; box-shadow: var(--shadow); color: white;
         }
-        .under-construction-hero::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(229,184,0,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+        .news-hero h1 {
+            font-family: 'Merriweather', serif; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .news-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;
         }
-        .under-construction-hero h1 {
-            font-family: 'Merriweather', serif; font-size: clamp(3rem, 8vw, 5rem); margin-bottom: 1rem;
-            position: relative; z-index: 1; text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        .news-card {
+            background: white; border-radius: 15px; box-shadow: var(--shadow); overflow: hidden;
+            transition: all 0.3s; border-top: 5px solid var(--accent-color);
         }
-        .under-construction-hero p {
-            font-size: 1.3rem; max-width: 600px; margin: 0 auto 2rem; position: relative; z-index: 1;
+        .news-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+        .news-image {
+            height: 200px; background: linear-gradient(45deg, var(--accent-color), #d4a700);
+            display: flex; align-items: center; justify-content: center; color: var(--primary-color);
+            font-size: 3rem;
         }
-        .construction-icon {
-            font-size: 6rem; margin-bottom: 2rem; opacity: 0.9; position: relative; z-index: 1;
-            animation: bounce 2s infinite;
+        .news-content {
+            padding: 1.5rem;
         }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
+        .news-date {
+            color: var(--text-light); font-size: 0.85rem; margin-bottom: 0.5rem;
         }
-        .status-badge {
-            display: inline-block; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px);
-            padding: 0.8rem 2rem; border-radius: 50px; font-weight: 600; font-size: 1.1rem;
-            border: 2px solid rgba(255,255,255,0.3); position: relative; z-index: 1;
+        .news-title {
+            font-family: 'Merriweather', serif; font-size: 1.2rem; color: var(--primary-color);
+            margin-bottom: 0.8rem; line-height: 1.4;
         }
-        .coming-soon-info {
-            background: white; padding: 3rem; border-radius: 20px; box-shadow: var(--shadow);
-            text-align: center; max-width: 600px; margin: 0 auto;
+        .news-excerpt {
+            color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.6;
         }
-        .coming-soon-info h2 {
-            color: var(--primary-color); font-family: 'Merriweather', serif; margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-        .features-list {
-            list-style: none; margin: 2rem 0; padding: 0;
-        }
-        .features-list li {
-            padding: 0.8rem 0; font-size: 1.1rem; position: relative; padding-left: 2.5rem;
-        }
-        .features-list li::before {
-            content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
-            position: absolute; left: 0; color: var(--accent-color); font-size: 1.2rem;
-        }
-        .back-link {
+        .read-more {
             display: inline-flex; align-items: center; gap: 0.5rem; color: var(--secondary-color);
-            text-decoration: none; font-weight: 600; margin-top: 2rem; padding: 1rem 2rem;
-            border: 2px solid var(--secondary-color); border-radius: 50px; transition: all 0.3s;
+            text-decoration: none; font-weight: 600; padding: 0.5rem 1rem;
+            border: 2px solid var(--secondary-color); border-radius: 25px; transition: all 0.3s;
         }
-        .back-link:hover { background: var(--secondary-color); color: white; transform: translateY(-2px); }
+        .read-more:hover { background: var(--secondary-color); color: white; }
         footer {
             background: #3b1300; color: #ffe9d1; text-align: center; padding: 2rem 1rem;
             margin-top: auto;
@@ -111,7 +94,7 @@
             }
             .nav-menu.active { left: 0; }
             .hamburger { display: flex; }
-            .under-construction-hero { padding: 4rem 1rem; }
+            .news-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -136,7 +119,16 @@
                         <li><a href="structuremembers.html" class="dropdown-item">Academy Members</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="news.html" class="nav-link"><i class="fas fa-newspaper"></i> News</a></li>
+                <li class="nav-item dropdown active">
+                    <a href="#" class="nav-link"><i class="fas fa-calendar-alt"></i> Activities <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="news.html" class="dropdown-item active">News</a></li>
+                        <li><a href="projects.html" class="dropdown-item">Projects</a></li>
+                        <li><a href="research.html" class="dropdown-item">Research</a></li>
+                        <li><a href="photos.html" class="dropdown-item">Photos</a></li>
+                        <li><a href="publications.html" class="dropdown-item">Publications</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
             <div class="hamburger" id="hamburger">
@@ -146,52 +138,59 @@
     </nav>
 
     <main>
-        <section class="under-construction-hero">
-            <div class="construction-icon">
-                <i class="fas fa-hard-hat"></i>
-            </div>
-            <h1>News Section</h1>
-            <p style="font-size: 1.3rem;">Coming Soon</p>
-            <div class="status-badge">Under Construction</div>
+        <section class="news-hero">
+            <h1>Latest News</h1>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+                Recent announcements and updates from the Euro Mediterranean Academy [web:206][web:45]
+            </p>
         </section>
 
-        <div class="coming-soon-info">
-            <h2>Exciting Updates Ahead</h2>
-            <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem;">
-                The News section is being carefully crafted to bring you the latest announcements, 
-                events, awards, and achievements from the Euro Mediterranean Academy.
-            </p>
-            <ul class="features-list">
-                <li>Latest Academy announcements and press releases</li>
-                <li>Upcoming conferences and scientific events</li>
-                <li>Member achievements and awards</li>
-                <li>Research breakthroughs and publications</li>
-                <li>International collaborations and partnerships</li>
-            </ul>
-            <a href="index.html" class="back-link">
-                <i class="fas fa-arrow-left"></i> Back to Home
-            </a>
+        <div class="news-grid">
+            <article class="news-card">
+                <div class="news-image">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">November 28, 2025</div>
+                    <h3 class="news-title">EMAAS Annual Awards Ceremony 2025</h3>
+                    <p class="news-excerpt">Distinguished members honored for outstanding contributions to science and arts. Over 50 researchers received awards for breakthrough publications and innovations.</p>
+                    <a href="#" class="read-more"><i class="fas fa-arrow-right"></i> Read More</a>
+                </div>
+            </article>
+
+            <article class="news-card">
+                <div class="news-image">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">November 15, 2025</div>
+                    <h3 class="news-title">New Founding Members Inducted</h3>
+                    <p class="news-excerpt">16 distinguished founding members officially recognized from the Academy's establishment on May 28, 2010. Ceremony celebrates decade-plus legacy.</p>
+                    <a href="#" class="read-more"><i class="fas fa-arrow-right"></i> Read More</a>
+                </div>
+            </article>
+
+            <article class="news-card">
+                <div class="news-image">
+                    <i class="fas fa-globe-europe"></i>
+                </div>
+                <div class="news-content">
+                    <div class="news-date">October 30, 2025</div>
+                    <h3 class="news-title">International Research Collaboration Launched</h3>
+                    <p class="news-excerpt">EMAAS partners with leading European institutions for quantum materials research. Multi-year project focuses on sustainable energy solutions.</p>
+                    <a href="#" class="read-more"><i class="fas fa-arrow-right"></i> Read More</a>
+                </div>
+            </article>
         </div>
     </main>
 
     <footer>
-        <p>© 2025 Euro Mediterranean Academy of Arts and Sciences. All rights reserved. [web:45][web:118]</p>
+        <p>© 2025 Euro Mediterranean Academy of Arts and Sciences. All rights reserved. [web:45][web:118][web:206]</p>
     </footer>
 
     <script>
-        // Mobile menu toggle
         document.getElementById('hamburger').addEventListener('click', () => {
             document.getElementById('navMenu').classList.toggle('active');
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
         });
     </script>
 </body>
