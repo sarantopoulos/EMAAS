@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Membership Criteria - EMAAS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #a42e00;
+            --secondary-color: #d54505;
+            --accent-color: #e5b800;
+            --danger-color: #7d1300;
+            --gold: #e5b800;
+            --text-dark: #2b1a0a;
+            --text-light: #6b5a4a;
+            --bg-light: #fff7eb;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.22);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            overflow-x: hidden;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        nav {
+            background: var(--primary-color);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.2rem;
+            align-items: center;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.6rem 0.9rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.95rem;
+        }
+        .nav-link:hover {
+            background: rgba(255,255,255,0.12);
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            max-height: 360px;
+            overflow-y: auto;
+            background: white;
+            box-shadow: var(--shadow-hover);
+            border-radius: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.25s ease;
+            list-style: none;
+            padding: 0.7rem 0;
+            z-index: 1001;
+        }
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 0.6rem 1.3rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.25s;
+        }
+        .dropdown-item:hover {
+            background: var(--bg-light);
+            color: var(--primary-color);
+            padding-left: 1.7rem;
+        }
+        .badge {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 999px;
+            font-weight: 600;
+            margin-left: 0.35rem;
+        }
+        .badge-about { background: rgba(255,255,255,0.16); }
+        .badge-struct { background: rgba(0,0,0,0.22); }
+        .badge-nous { background: var(--gold); color: var(--primary-color); }
+        .dropdown-about { background: linear-gradient(135deg, #c94707, #ff7a1a); }
+        .dropdown-about .dropdown-item { color: white; }
+        .dropdown-struct { background: linear-gradient(135deg, #7b3b00, #b85b08); }
+        .dropdown-struct .dropdown-item { color: #fff7eb; }
+        .dropdown-nous { background: linear-gradient(135deg, #f0c545, #e5b800); }
+        .dropdown-nous .dropdown-item { color: #4a2600; }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        .hamburger span {
+            width: 22px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+        main {
+            margin-top: 80px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 4rem 2rem;
+        }
+        .criteria-hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--gold) 0%, #f0c545 100%);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            color: #4a2600;
+        }
+        .criteria-hero h1 {
+            font-family: 'Merriweather', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .criteria-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        .criteria-section h2 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+        .criteria-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+        .criteria-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .criteria-list li {
+            padding: 1rem 0 1rem 2rem;
+            font-size: 1.1rem;
+            position: relative;
+            margin-bottom: 0.8rem;
+        }
+        .criteria-list li:before {
+            content: "✓";
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        footer {
+            background: #3b1300;
+            color: #ffe9d1;
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+        @media (max-width: 820px) {
+            .nav-inner { padding: 0 1rem; }
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: var(--primary-color);
+                width: 100%;
+                text-align: center;
+                padding: 1.5rem 0;
+                gap: 0;
+                transition: 0.3s;
+            }
+            .nav-menu.active { left: 0; }
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border-radius: 0;
+                max-height: none;
+                background: rgba(0,0,0,0.18);
+            }
+            .dropdown-item { color: #ffe9d1; }
+            .dropdown-item:hover {
+                background: rgba(255,255,255,0.12);
+                color: white;
+                padding-left: 1.3rem;
+            }
+            .hamburger { display: flex; }
+            main { padding: 2rem 1rem; }
+            .criteria-hero, .criteria-section { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (same as index.html) -->
+    <nav>
+        <div class="nav-inner">
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-info-circle"></i> About 
+                        <span class="badge badge-about">Infos</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content dropdown-about">
+                        <li><a href="mission.html" class="dropdown-item">Mission</a></li>
+                        <li><a href="vision.html" class="dropdown-item">Vision</a></li>
+                        <li><a href="history.html" class="dropdown-item">History</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-sitemap"></i> Structure 
+                        <span class="badge badge-struct">Org</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content dropdown-struct">
+                        <li><a href="structurepresidium.html" class="dropdown-item">Presidium</a></li>
+                        <li><a href="structureadvisory-council.html" class="dropdown-item">Advisory Council</a></li>
+                        <li><a href="structuremembers.html" class="dropdown-item">Academy Members</a></li>
+                        <li><a href="eligibility-criteria.html" class="dropdown-item">Eligibility Criteria</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-newspaper"></i> Nous 
+                        <span class="badge badge-nous">Articles</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content dropdown-nous">
+                        <li><a href="nous.html" class="dropdown-item">About Nous</a></li>
+                        <li><a href="nouslatest.html" class="dropdown-item">Latest Publications</a></li>
+                        <li><a href="submit-articles.html" class="dropdown-item">Submit Articles</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-tasks"></i> Activities 
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li><a href="news.html" class="dropdown-item">News</a></li>
+                        <li><a href="projects.html" class="dropdown-item">Projects</a></li>
+                        <li><a href="research.html" class="dropdown-item">Research Areas</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i> Resources 
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li><a href="documents.html" class="dropdown-item">Documents</a></li>
+                        <li><a href="photos.html" class="dropdown-item">Photo Gallery</a></li>
+                        <li><a href="publications.html" class="dropdown-item">Publications</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        
+        <section class="criteria-hero">
+            <h1>Membership</h1>
+        </section>
+
+        <section class="criteria-section">
+            <h2>General Requirements</h2>
+            <p>A person of distinguished merit, citizen of any country or even without citizenship, independently of sex, nationality, race and political orientation, may apply for membership for their outstanding achievements in science and arts. The applicant must have a Doctor's degree and an appropriate curriculum vita; the list of the scientific publications (up to 100 articles and books), be eminent as a scholar/scientist and two reference letters by distinguished scientists to support her/his application. A candidate must have interdisciplinary background and act in response to the mission and vision of the Academy. EMAAS nominates scientists, scholars and experts of international distinction who have successful academic status and exceptional standing in society as a result of their accomplishments, publications or for analogous talents. The primary criterion for membership is sustained academic excellence in a specific field. Membership is attained thorough a petition, review, and election process.</p>
+            <p>A candidate will deliver a short introductory information about her/his achievements through online meeting.</p>
+        </section>
+
+        <section class="criteria-section">
+            <h2>Criteria for election in scientific/scholarly order</h2>
+            <ul class="criteria-list">
+                <li>Full Professors' status (provided by the university procedure of nomination)</li>
+                <li>Ph.D. or equivalent</li>
+                <li>Publications: (about 100 articles or book chapters, or equivalent)</li>
+            </ul>
+        </section>
+
+        <section class="criteria-section">
+            <h2>Criteria for election in the artist order</h2>
+            <ul class="criteria-list">
+                <li><strong>Visual arts:</strong> art academy degree, solo exhibitions in well-known (public) museums in different countries, at best one published monograph about their work</li>
+                <li><strong>Architecture:</strong> university degree, published monographs, public buildings in different countries, and architectural prize(s)</li>
+                <li><strong>Music:</strong> music academy degree, performance/s at the concerts in famous places in different countries, at best one national musical distinction</li>
+                <li><strong>Literature, Writers/authors:</strong> university/academic degree, national literary prize(s) and books translated in other languages</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Euro Mediterranean Academy of Arts and Sciences. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
