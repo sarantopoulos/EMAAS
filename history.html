@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>History - EMAAS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #a42e00;
+            --secondary-color: #d54505;
+            --accent-color: #e5b800;
+            --danger-color: #7d1300;
+            --gold: #e5b800;
+            --text-dark: #2b1a0a;
+            --text-light: #6b5a4a;
+            --bg-light: #fff7eb;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.22);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--bg-light);
+            overflow-x: hidden;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        nav {
+            background: var(--primary-color);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.2rem;
+            align-items: center;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.6rem 0.9rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.95rem;
+        }
+        .nav-link:hover {
+            background: rgba(255,255,255,0.12);
+        }
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            max-height: 360px;
+            overflow-y: auto;
+            background: white;
+            box-shadow: var(--shadow-hover);
+            border-radius: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: all 0.25s ease;
+            list-style: none;
+            padding: 0.7rem 0;
+            z-index: 1001;
+        }
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .dropdown-item {
+            display: block;
+            padding: 0.6rem 1.3rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.25s;
+        }
+        .dropdown-item:hover {
+            background: var(--bg-light);
+            color: var(--primary-color);
+            padding-left: 1.7rem;
+        }
+        .badge {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 999px;
+            font-weight: 600;
+            margin-left: 0.35rem;
+        }
+        .badge-about { background: rgba(255,255,255,0.16); }
+        .badge-struct { background: rgba(0,0,0,0.22); }
+        .badge-nous { background: var(--gold); color: var(--primary-color); }
+        .dropdown-about { background: linear-gradient(135deg, #c94707, #ff7a1a); }
+        .dropdown-about .dropdown-item { color: white; }
+        .dropdown-struct { background: linear-gradient(135deg, #7b3b00, #b85b08); }
+        .dropdown-struct .dropdown-item { color: #fff7eb; }
+        .dropdown-nous { background: linear-gradient(135deg, #f0c545, #e5b800); }
+        .dropdown-nous .dropdown-item { color: #4a2600; }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        .hamburger span {
+            width: 22px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+        main {
+            margin-top: 80px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 4rem 2rem;
+        }
+        .history-hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #7b3b00 0%, #a42e00 100%);
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            color: #fff7eb;
+        }
+        .history-hero h1 {
+            font-family: 'Merriweather', serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: #fff7eb;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .history-content {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-dark);
+        }
+        .future-goals {
+            background: linear-gradient(135deg, var(--bg-light) 0%, #fff8e8 100%);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow);
+        }
+        .future-goals h3 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .future-goals ul {
+            list-style: none;
+            padding: 0;
+        }
+        .future-goals li {
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+        .future-goals li:before {
+            content: "▸";
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: 0.8rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        footer {
+            background: #3b1300;
+            color: #ffe9d1;
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+        @media (max-width: 820px) {
+            .nav-inner { padding: 0 1rem; }
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: var(--primary-color);
+                width: 100%;
+                text-align: center;
+                padding: 1.5rem 0;
+                gap: 0;
+                transition: 0.3s;
+            }
+            .nav-menu.active { left: 0; }
+            .dropdown-content {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border-radius: 0;
+                max-height: none;
+                background: rgba(0,0,0,0.18);
+            }
+            .dropdown-item { color: #ffe9d1; }
+            .dropdown-item:hover {
+                background: rgba(255,255,255,0.12);
+                color: white;
+                padding-left: 1.3rem;
+            }
+            .hamburger { display: flex; }
+            main { padding: 2rem 1rem; }
+            .history-hero { padding: 2rem 1rem; }
+            .future-goals { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (same as index.html) -->
+    <nav>
+        <div class="nav-inner">
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-info-circle"></i> About 
+                        <span class="badge badge-about">Infos</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content dropdown-about">
+                        <li><a href="mission.html" class="dropdown-item">Mission</a></li>
+                        <li><a href="vision.html" class="dropdown-item">Vision</a></li>
+                        <li><a href="history.html" class="dropdown-item">History</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-sitemap"></i> Structure 
+                        <span class="badge badge-struct">Org</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content dropdown-struct">
+                        <li><a href="structurepresidium.html" class="dropdown-item">Presidium</a></li>
+                        <li><a href="structureadvisory-council.html" class="dropdown-item">Advisory Council</a></li>
+                        <li><a href="structuremembers.html" class="dropdown-item">Academy Members</a></li>
+                        <li><a href="eligibility-criteria.html" class="dropdown-item">Eligibility Criteria</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-newspaper"></i> Nous 
+                        <span class="badge badge-nous">Articles</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content dropdown-nous">
+                        <li><a href="nous.html" class="dropdown-item">About Nous</a></li>
+                        <li><a href="nouslatest.html" class="dropdown-item">Latest Publications</a></li>
+                        <li><a href="submit-articles.html" class="dropdown-item">Submit Articles</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-tasks"></i> Activities 
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li><a href="news.html" class="dropdown-item">News</a></li>
+                        <li><a href="projects.html" class="dropdown-item">Projects</a></li>
+                        <li><a href="research.html" class="dropdown-item">Research Areas</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i> Resources 
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <ul class="dropdown-content">
+                        <li><a href="documents.html" class="dropdown-item">Documents</a></li>
+                        <li><a href="photos.html" class="dropdown-item">Photo Gallery</a></li>
+                        <li><a href="publications.html" class="dropdown-item">Publications</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+        
+        <section class="history-hero">
+            <h1>EMAAS History</h1>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
+                The Euro Mediterranean Academy of Arts and Sciences (EMAAS) is an International Academy established by twenty two internationally known scientists and artists.
+            </p>
+        </section>
+
+        <section class="history-content">
+            <p>It is founded in the historical city of Sparta, in Greece, where its headquarters are, but has also a branch office in Lausanne Switzerland. The creation of branch offices in other cities is within its future plans.</p>
+        </section>
+
+        <section class="future-goals">
+            <h3>Emboldened by the success of our years of actuality, EMAAS looks to the future:</h3>
+            <ul>
+                <li>Global innovation through inclusive research/exploration/inquiries</li>
+                <li>A Global scientists experience</li>
+                <li>A network of academic and operational excellence</li>
+                <li>Strategic and sustainable development</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Euro Mediterranean Academy of Arts and Sciences. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
