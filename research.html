@@ -59,16 +59,40 @@
         .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
         .hamburger span { width: 22px; height: 3px; background: white; transition: 0.3s; }
         main {
-            margin-top: 80px; flex: 1; max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;
+            margin-top: 80px; flex: 1; max-width: 1200px; margin: 0 auto; padding: 2rem 2rem 4rem;
         }
-        .research-hero {
-            text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, var(--primary-color) 0%, #d54505 100%);
-            border-radius: 20px; margin-bottom: 3rem; box-shadow: var(--shadow); color: white;
+        .grand-phd-section {
+            background: #fff4d1;
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
         }
-        .research-hero h1 {
-            font-family: 'Merriweather', serif; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        .grand-phd-section h2 {
+            font-family: 'Merriweather', serif;
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
+        .grand-phd-section p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .grand-phd-section a {
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .grand-phd-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Existing research content styling */
+
         .research-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;
         }
@@ -163,11 +187,11 @@
     </nav>
 
     <main>
-        <section class="research-hero">
-            <h1>Research Areas</h1>
-            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
-                Cutting-edge research domains pursued by EMAAS members [web:206][web:45]
-            </p>
+        <section class="grand-phd-section">
+            <h2>Distinguished Doctoral Degree</h2>
+            <p>Highly recognized scientists may apply to EMAAS for the Distinguished Doctoral Degree.</p>
+            <p>To qualify for the EMAAS Distinguished Doctoral Degree, a scientist must have a university PhD degree and more than 100 scientific publications, must have conducted research, contributed in solving scientific problems in their specific area, and supervised PhD students.</p>
+            <p>The application to EMAAS for this degree must be supported by a Curriculum Vitae, a memorandum on scientific research activities and contributions in solving scientific problems, and a list of publications. All the above must be sent in the form of electronic files to the President of the Academy (<a href="mailto:kervalpt@yahoo.com">kervalpt@yahoo.com</a>) along with the sum of Euros 500 to cover administrative and paperwork expenses.</p>
         </section>
 
         <div class="research-grid">
@@ -234,7 +258,7 @@
     </main>
 
     <footer>
-        <p>© 2025 Euro Mediterranean Academy of Arts and Sciences. All rights reserved. [web:45][web:206][web:207]</p>
+        <p>© 2025 Euro Mediterranean Academy of Arts and Sciences. All rights reserved. [web:206][web:45]</p>
     </footer>
 
     <script>
@@ -244,4 +268,3 @@
     </script>
 </body>
 </html>
-
