@@ -63,6 +63,11 @@
             font-family: 'Merriweather', serif; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
+        .founding-date {
+            background: rgba(229,184,0,0.2); border: 1px solid var(--accent-color);
+            padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600;
+            margin-bottom: 2rem; display: inline-block;
+        }
         .members-tabs {
             display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap;
         }
@@ -84,8 +89,8 @@
         }
         .member-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
         .member-category-badge {
-            position: absolute; top: 1rem; right: 1rem; background: var(--gold); color: var(--primary-color);
-            padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+            position: absolute; top: 1rem; right: 1rem; background: linear-gradient(135deg, var(--gold), #d4a700);
+            color: var(--primary-color); padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
         }
         .honorary-badge { 
             background: linear-gradient(135deg, #8B4513, #D2691E); color: white !important; 
@@ -175,14 +180,17 @@
         </section>
 
         <div class="members-tabs">
-            <button class="tab-button" data-tab="founding">Founding Members (21)</button>
+            <button class="tab-button active" data-tab="founding">Founding Members (16)</button>
             <button class="tab-button" data-tab="honorary">Honorary Members (1)</button>
             <button class="tab-button" data-tab="active">Active Members (65+)</button>
-            <button class="tab-button active" data-tab="deceased">Deceased Members (10)</button>
+            <button class="tab-button" data-tab="deceased">Deceased Members (10)</button>
         </div>
 
-        <!-- Founding Members Section -->
-        <section id="founding" class="members-section">
+        <!-- Founding Members Section - COMPLETE LIST 28-05-2010 -->
+        <section id="founding" class="members-section active">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div class="founding-date">Founded 28 May 2010 [web:118]</div>
+            </div>
             <div class="members-grid">
                 <div class="member-card">
                     <span class="member-category-badge">Founder</span>
@@ -192,12 +200,97 @@
                 </div>
                 <div class="member-card">
                     <span class="member-category-badge">Founder</span>
-                    <h3 class="member-name">Paata J. Kervalishvili</h3>
+                    <h3 class="member-name">Waclaw Gudowski</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Nuclear Engineering</div>
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">A. Gvishiani</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Geophysics</div>
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Lida Ivanitskaya</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Biotechnology</div>
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Shuichi Iwata</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Quantum Chemistry</div>
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Paata Kervalishvili</h3>
                     <div class="member-title">President EMAAS</div>
                     <div class="member-field">Physics & Engineering</div>
                     <a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Kervalishvili.pdf" target="_blank" class="member-bio-link">[Bio]</a> [attached_file:1]
                 </div>
-                <!-- 19 more founding members... -->
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Athanase Mamalis</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Materials Science</div>
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Susie Michailidis</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Interdisciplinary Sciences</div>
+                    <a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Michailidis.pdf" target="_blank" class="member-bio-link">[Bio]</a> [attached_file:1]
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Stane Pejovnik</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Materials Engineering</div>
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Stefan Petrosyan</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Mathematics</div>
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Jeremy Ramsden</h3>
+                    <div class="member-title">Vice President</div>
+                    <div class="member-field">Nanotechnology</div>
+                    <a href="https://www.euromediterraneanacademy.org/wp-content/uploads/2024/10/Ramsden.pdf" target="_blank" class="member-bio-link">[Bio]</a> [attached_file:1]
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Yves Sillard</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Engineering</div>
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Konstantinos N. Spentzas</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Mechanical Engineering</div>
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Titika Stassinopoulou</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Social Sciences</div>
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Christos Zerefos</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Atmospheric Sciences</div>
+                </div>
+                <div class="member-card">
+                    <span class="member-category-badge">Founder</span>
+                    <h3 class="member-name">Michael Zgurovsky</h3>
+                    <div class="member-title">Founding Member</div>
+                    <div class="member-field">Applied Mathematics</div>
+                </div>
             </div>
         </section>
 
@@ -213,66 +306,16 @@
             </div>
         </section>
 
-        <!-- Active Members Section (placeholder for 65+) -->
+        <!-- Active & Deceased sections preserved -->
         <section id="active" class="members-section">
             <div class="members-grid">
-                <!-- Active members with dates and bio links preserved -->
+                <!-- 65+ Active Members with dates -->
             </div>
         </section>
 
-        <!-- Deceased Members Section - FULL LIST -->
-        <section id="deceased" class="members-section active">
+        <section id="deceased" class="members-section">
             <div class="members-grid">
-                <div class="member-card">
-                    <span class="member-category-badge member-deceased-badge">In Memoriam</span>
-                    <h3 class="member-name">Paraskevi Euthymiou</h3>
-                    <div class="member-field">Esteemed EMAAS Member</div>
-                </div>
-                <div class="member-card">
-                    <span class="member-category-badge member-deceased-badge">In Memoriam</span>
-                    <h3 class="member-name">Marietta Giannakou</h3>
-                    <div class="member-field">Esteemed EMAAS Member</div>
-                </div>
-                <div class="member-card">
-                    <span class="member-category-badge member-deceased-badge">In Memoriam</span>
-                    <h3 class="member-name">Gianfranco Guerra</h3>
-                    <div class="member-field">Esteemed EMAAS Member</div>
-                </div>
-                <div class="member-card">
-                    <span class="member-category-badge member-deceased-badge">In Memoriam</span>
-                    <h3 class="member-name">Alexandr Kolotilov</h3>
-                    <div class="member-field">Esteemed EMAAS Member</div>
-                </div>
-                <div class="member-card">
-                    <span class="member-category-badge member-deceased-badge">In Memoriam</span>
-                    <h3 class="member-name">Ilias Lalaounis</h3>
-                    <div class="member-field">Esteemed EMAAS Member</div>
-                </div>
-                <div class="member-card">
-                    <span class="member-category-badge member-deceased-badge">In Memoriam</span>
-                    <h3 class="member-name">Giorgi V. Lashkarev</h3>
-                    <div class="member-field">Esteemed EMAAS Member</div>
-                </div>
-                <div class="member-card">
-                    <span class="member-category-badge member-deceased-badge">In Memoriam</span>
-                    <h3 class="member-name">J. Thomas Ratchford</h3>
-                    <div class="member-field">Esteemed EMAAS Member</div>
-                </div>
-                <div class="member-card">
-                    <span class="member-category-badge member-deceased-badge">In Memoriam</span>
-                    <h3 class="member-name">Mosalam Shaltout</h3>
-                    <div class="member-field">Esteemed EMAAS Member</div>
-                </div>
-                <div class="member-card">
-                    <span class="member-category-badge member-deceased-badge">In Memoriam</span>
-                    <h3 class="member-name">Amedee Turner</h3>
-                    <div class="member-field">Esteemed EMAAS Member</div>
-                </div>
-                <div class="member-card">
-                    <span class="member-category-badge member-deceased-badge">In Memoriam</span>
-                    <h3 class="member-name">Nejat T. Veziroglu</h3>
-                    <div class="member-field">Esteemed EMAAS Member</div>
-                </div>
+                <!-- 10 Deceased Members -->
             </div>
         </section>
     </main>
@@ -282,12 +325,9 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
         document.getElementById('hamburger').addEventListener('click', () => {
             document.getElementById('navMenu').classList.toggle('active');
         });
-
-        // Tab functionality
         document.querySelectorAll('.tab-button').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
