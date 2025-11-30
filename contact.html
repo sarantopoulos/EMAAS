@@ -1,1 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact - EMAAS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #a42e00;
+            --secondary-color: #d54505;
+            --accent-color: #e5b800;
+            --text-dark: #2b1a0a;
+            --text-light: #6b5a4a;
+            --bg-light: #fff7eb;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.22);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Open Sans', sans-serif; line-height: 1.7; color: var(--text-dark);
+            background: var(--bg-light); min-height: 100vh; display: flex; flex-direction: column;
+        }
+        header { position: fixed; top: 0; width: 100%; z-index: 1000; }
+        nav { background: var(--primary-color); height: 80px; }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 2rem; height: 100%;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-menu { display: flex; list-style: none; gap: 1.2rem; align-items: center; }
+        .nav-link {
+            color: white; text-decoration: none; font-weight: 500; padding: 0.6rem 0.9rem;
+            border-radius: 8px; transition: all 0.3s; display: flex; align-items: center; gap: 0.4rem;
+        }
+        .nav-link:hover { background: rgba(255,255,255,0.12); }
+        .nav-link.active { 
+            background: var(--accent-color); color: var(--primary-color); font-weight: 700;
+        }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
+        .hamburger span { width: 22px; height: 3px; background: white; transition: 0.3s; }
+        main {
+            margin-top: 80px; flex: 1; max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;
+        }
+        .contact-hero {
+            text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, var(--primary-color) 0%, #d54505 100%);
+            border-radius: 20px; margin-bottom: 3rem; box-shadow: var(--shadow); color: white;
+        }
+        .contact-hero h1 {
+            font-family: 'Merriweather', serif; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .contact-info {
+            background: white; padding: 3rem; border-radius: 20px; box-shadow: var(--shadow);
+            max-width: 600px; margin: 0 auto; text-align: center;
+        }
+        .contact-info h2 {
+            font-family: 'Merriweather', serif; color: var(--primary-color); margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        .contact-item {
+            display: block; margin-bottom: 1.5rem; font-size: 1.1rem;
+        }
+        .contact-email {
+            color: var(--secondary-color); font-weight: 600; text-decoration: none;
+            padding: 0.8rem 1.5rem; border: 2px solid var(--secondary-color); 
+            border-radius: 50px; display: inline-block; transition: all 0.3s;
+            background: var(--bg-light);
+        }
+        .contact-email:hover {
+            background: var(--secondary-color); color: white; transform: translateY(-2px);
+        }
+        .contact-item i {
+            color: var(--accent-color); margin-right: 0.8rem; font-size: 1.2rem;
+        }
+        footer {
+            background: #3b1300; color: #ffe9d1; text-align: center; padding: 2rem 1rem;
+            margin-top: auto;
+        }
+        @media (max-width: 820px) {
+            .nav-menu { 
+                position: fixed; left: -100%; top: 80px; flex-direction: column; background: var(--primary-color);
+                width: 100%; text-align: center; padding: 1.5rem 0; transition: 0.3s; 
+            }
+            .nav-menu.active { left: 0; }
+            .hamburger { display: flex; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link"><i class="fas fa-info-circle"></i> About <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="mission.html" class="dropdown-item">Mission</a></li>
+                        <li><a href="vision.html" class="dropdown-item">Vision</a></li>
+                        <li><a href="history.html" class="dropdown-item">History</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link"><i class="fas fa-sitemap"></i> Structure <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="structurepresidium.html" class="dropdown-item">Presidium</a></li>
+                        <li><a href="structureadvisory-council.html" class="dropdown-item">Advisory Council</a></li>
+                        <li><a href="structuremembers.html" class="dropdown-item">Academy Members</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link"><i class="fas fa-calendar-alt"></i> Activities <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="news.html" class="dropdown-item">News</a></li>
+                        <li><a href="projects.html" class="dropdown-item">Projects</a></li>
+                        <li><a href="research.html" class="dropdown-item">Research</a></li>
+                        <li><a href="photos.html" class="dropdown-item">Photos</a></li>
+                        <li><a href="publications.html" class="dropdown-item">Publications</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="contact.html" class="nav-link active"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="contact-hero">
+            <h1>Contact Us</h1>
+            <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+                Get in touch with the Euro Mediterranean Academy [web:45][web:118]
+            </p>
+        </section>
+
+        <div class="contact-info">
+            <h2>For information about EMAAS contact:</h2>
+            
+            <div class="contact-item">
+                <i class="fas fa-user-tie"></i>
+                Prof. Dr. Paata Kervalishvili: 
+                <a href="mailto:kervalpt@yahoo.com" class="contact-email">kervalpt@yahoo.com</a>
+            </div>
+            
+            <div class="contact-item">
+                <i class="fas fa-user-md"></i>
+                Dr. Susie Michailidis: 
+                <a href="mailto:michailidiss@webster.edu" class="contact-email">michailidiss@webster.edu</a>
+            </div>
+            
+            <div class="contact-item">
+                <i class="fas fa-user-graduate"></i>
+                Dr. Athanasios Sarantopoulos: 
+                <a href="mailto:asarantopoulos18@webster.edu" class="contact-email">asarantopoulos18@webster.edu</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 Euro Mediterranean Academy of Arts and Sciences. All rights reserved. [web:45][web:118]</p>
+    </footer>
+
+    <script>
+        document.getElementById('hamburger').addEventListener('click', () => {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
 
